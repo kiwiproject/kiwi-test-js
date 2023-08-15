@@ -1,6 +1,5 @@
-import { KiwiPreconditions } from "@kiwiproject/kiwi-js";
-import { MongoClient } from "mongodb";
-import { GenericContainer } from "testcontainers";
+import {KiwiPreconditions} from "@kiwiproject/kiwi-js";
+import {GenericContainer} from "testcontainers";
 
 async function startMongoContainer() {
   global.MONGO_CONTAINER = await new GenericContainer("mongo")
@@ -28,21 +27,13 @@ function getMongoBaseUrl(): string {
   return `mongodb://${host}:${port}/`;
 }
 
-async function clearDatabase(dbName: string) {
-  const client = new MongoClient(getMongoBaseUrl());
-  const db = client.db(dbName);
-
-  const collections = await db.collections();
-  for (const c of collections) {
-    await c.drop();
-  }
-
-  await client.close(true);
+function getMongoUriWithDb(dbName: string): string {
+  return `${getMongoBaseUrl()}/${dbName}`;
 }
 
 export const MongoExtension = {
   startMongoContainer,
   stopMongoContainer,
   getMongoBaseUrl,
-  clearDatabase,
+  getMongoUriWithDb,
 };

@@ -1,6 +1,5 @@
-import { describe, it, expect, afterEach } from "@jest/globals";
-import { MongoExtension } from "../../src";
-import { MongoClient } from "mongodb";
+import {afterEach, describe, expect, it} from "@jest/globals";
+import {MongoExtension} from "../../src";
 
 describe("MongoExtension", () => {
   afterEach(async () => {
@@ -54,37 +53,19 @@ describe("MongoExtension", () => {
     });
   });
 
-  describe("clearDatabase", () => {
-    it("should drop all collections in the database", async () => {
+  describe("getMongoUriWithDb", () => {
+    it("should return the base url with the given db for the started container", async () => {
       await MongoExtension.startMongoContainer();
 
-      const url = MongoExtension.getMongoBaseUrl();
-
-      const client = new MongoClient(url);
-      const db = client.db("kiwi");
-
-      await db.createCollection("collection1");
-      await db.createCollection("collection2");
-
-      const collections = await db.collections();
-      expect(collections).toHaveLength(2);
-
-      await MongoExtension.clearDatabase("kiwi");
-
-      const collectionsAfterClear = await db.collections();
-      expect(collectionsAfterClear).toHaveLength(0);
-
-      await client.close(true);
+      const url = MongoExtension.getMongoUriWithDb("kiwi");
+      expect(url).toContain("mongodb://localhost:");
+      expect(url).toContain("/kiwi");
     }, 60_000);
 
     it("should throw error when container is not previously started", () => {
-      expect(MongoExtension.clearDatabase("kiwi")).rejects.toEqual(
-        Error(
-          "IllegalStateException: Mongo container has not been previously started",
-        ),
+      expect(() => MongoExtension.getMongoUriWithDb("kiwi")).toThrow(
+        "IllegalStateException: Mongo container has not been previously started",
       );
-
-      expect(global.MONGO_CONTAINER).toBeUndefined();
     });
   });
 });

@@ -1,6 +1,6 @@
-import { KiwiPreconditions } from "@kiwiproject/kiwi-js";
-import { PostgreSqlContainer } from "@testcontainers/postgresql";
-import { Client } from "pg";
+import {KiwiPreconditions} from "@kiwiproject/kiwi-js";
+import {PostgreSqlContainer} from "@testcontainers/postgresql";
+import {Client} from "pg";
 
 async function startPostgresContainer() {
   global.POSTGRES_CONTAINER = await new PostgreSqlContainer().start();
@@ -24,6 +24,10 @@ function getPostgresBaseUrl(): string {
   return global.POSTGRES_CONTAINER.getConnectionUri();
 }
 
+function getPostgresUriWithDb(dbName: string): string {
+  return getPostgresBaseUrl().replace(/\/test$/, `/${dbName}`);
+}
+
 async function setupNewDatabase(dbName: string) {
   const dbClient = new Client({
     connectionString: getPostgresBaseUrl(),
@@ -33,28 +37,10 @@ async function setupNewDatabase(dbName: string) {
   await dbClient.end();
 }
 
-async function clearDatabase(dbName: string) {
-  const client = new Client({
-    connectionString: getPostgresBaseUrl().replace(/\/test$/, `/${dbName}`),
-  });
-  await client.connect();
-
-  const response = await client.query(
-    "select table_name from information_schema.tables where table_catalog = $1 and table_schema = 'public'",
-    [dbName],
-  );
-  const tables = response.rows.map((row) => row.table_name);
-
-  for (const table of tables) {
-    await client.query(`truncate table ${table}`);
-  }
-  await client.end();
-}
-
 export const PostgresExtension = {
   startPostgresContainer,
   stopPostgresContainer,
   getPostgresBaseUrl,
+  getPostgresUriWithDb,
   setupNewDatabase,
-  clearDatabase,
 };

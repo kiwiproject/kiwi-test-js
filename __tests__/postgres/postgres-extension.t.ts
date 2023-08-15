@@ -1,6 +1,6 @@
-import { describe, it, expect, afterEach } from "@jest/globals";
-import { PostgresExtension } from "../../src";
-import { Client } from "pg";
+import {afterEach, describe, expect, it} from "@jest/globals";
+import {PostgresExtension} from "../../src";
+import {Client} from "pg";
 
 describe("PostgresExtension", () => {
   afterEach(async () => {
@@ -54,53 +54,19 @@ describe("PostgresExtension", () => {
     });
   });
 
-  describe("clearDatabase", () => {
-    it("should truncate all tables in the database", async () => {
+  describe("getPostgresUriWithDb", () => {
+    it("should return the base url with the given db for the started container", async () => {
       await PostgresExtension.startPostgresContainer();
-      const url = PostgresExtension.getPostgresBaseUrl();
 
-      const dbclient = new Client({
-        connectionString: url,
-      });
-      await dbclient.connect();
-      await dbclient.query("create database kiwi");
-      await dbclient.end();
-
-      const tableClient = new Client({
-        connectionString: url.replace(/\/test$/, "/kiwi"),
-      });
-      await tableClient.connect();
-      await tableClient.query("create table my_test_table (name varchar)");
-      await tableClient.query(
-        "insert into my_test_table (name) values ('foo')",
-      );
-      const responseBefore = await tableClient.query(
-        "select count(*) from my_test_table",
-      );
-      expect(responseBefore.rows[0].count).toEqual("1");
-      await tableClient.end();
-
-      await PostgresExtension.clearDatabase("kiwi");
-
-      const tableClient2 = new Client({
-        connectionString: url.replace(/\/test$/, "/kiwi"),
-      });
-      await tableClient2.connect();
-      const responseAfter = await tableClient2.query(
-        "select count(*) from my_test_table",
-      );
-      expect(responseAfter.rows[0].count).toEqual("0");
-      await tableClient2.end();
+      const url = PostgresExtension.getPostgresUriWithDb("kiwi");
+      expect(url).toContain("postgres://test:test@localhost:");
+      expect(url).toContain("/kiwi");
     }, 60_000);
 
     it("should throw error when container is not previously started", () => {
-      expect(PostgresExtension.clearDatabase("kiwi")).rejects.toEqual(
-        Error(
-          "IllegalStateException: Postgres container has not been previously started",
-        ),
+      expect(() => PostgresExtension.getPostgresUriWithDb("kiwi")).toThrow(
+        "IllegalStateException: Postgres container has not been previously started",
       );
-
-      expect(global.POSTGRES_CONTAINER).toBeUndefined();
     });
   });
 
