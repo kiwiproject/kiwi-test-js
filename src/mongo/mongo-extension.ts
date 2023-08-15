@@ -23,7 +23,9 @@ function getMongoBaseUrl(): string {
     "Mongo container has not been previously started",
   );
 
-  return `mongodb://${global.MONGO_CONTAINER.getHost()}:${global.MONGO_CONTAINER.getMappedPort(27017,)}/`;
+  const host = global.MONGO_CONTAINER.getHost();
+  const port = global.MONGO_CONTAINER.getMappedPort(27017);
+  return `mongodb://${host}:${port}/`;
 }
 
 async function clearDatabase(dbName: string) {
