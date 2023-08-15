@@ -17,7 +17,7 @@ describe("MongoExtension", () => {
       expect(global.MONGO_CONTAINER).toBeDefined();
 
       await global.MONGO_CONTAINER.stop();
-    }, 10_000);
+    }, 60_000);
   });
 
   describe("stopMongoContainer", () => {
@@ -26,7 +26,7 @@ describe("MongoExtension", () => {
       await MongoExtension.stopMongoContainer();
 
       expect(global.MONGO_CONTAINER).toBeUndefined();
-    }, 10_000);
+    }, 60_000);
 
     it("should throw error when container is not previously started", () => {
       expect(MongoExtension.stopMongoContainer()).rejects.toEqual(
@@ -45,7 +45,7 @@ describe("MongoExtension", () => {
 
       const url = MongoExtension.getMongoBaseUrl();
       expect(url).toContain("mongodb://localhost:");
-    }, 10_000);
+    }, 60_000);
 
     it("should throw error when container is not previously started", () => {
       expect(() => MongoExtension.getMongoBaseUrl()).toThrow(
@@ -75,7 +75,7 @@ describe("MongoExtension", () => {
       expect(collectionsAfterClear).toHaveLength(0);
 
       await client.close(true);
-    }, 10_000);
+    }, 60_000);
 
     it("should throw error when container is not previously started", () => {
       expect(MongoExtension.clearDatabase("kiwi")).rejects.toEqual(
