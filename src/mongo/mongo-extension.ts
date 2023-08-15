@@ -28,7 +28,7 @@ function getMongoBaseUrl(): string {
 }
 
 function getMongoUriWithDb(dbName: string): string {
-  return `${getMongoBaseUrl()}/${dbName}`;
+  return `${getMongoBaseUrl()}${dbName}`;
 }
 
 export const MongoExtension = {
