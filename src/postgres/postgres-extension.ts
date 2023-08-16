@@ -2,8 +2,8 @@ import { KiwiPreconditions } from "@kiwiproject/kiwi-js";
 import { PostgreSqlContainer } from "@testcontainers/postgresql";
 import { Client } from "pg";
 
-async function startPostgresContainer() {
-  global.POSTGRES_CONTAINER = await new PostgreSqlContainer().start();
+async function startPostgresContainer(image: string = "postgres:15") {
+  global.POSTGRES_CONTAINER = await new PostgreSqlContainer(image).start();
 }
 
 async function stopPostgresContainer() {

@@ -1,10 +1,12 @@
 import { KiwiPreconditions } from "@kiwiproject/kiwi-js";
 import { GenericContainer, Wait } from "testcontainers";
 
-async function startMinioSearchContainer(accessKey: string, secretKey: string) {
-  global.MINIO_CONTAINER = await new GenericContainer(
-    "quay.io/minio/minio:latest",
-  )
+async function startMinioSearchContainer(
+  accessKey: string,
+  secretKey: string,
+  image: string = "minio/minio:RELEASE.2023-08-09T23-30-22Z",
+) {
+  global.MINIO_CONTAINER = await new GenericContainer(image)
     .withEnvironment({
       MINIO_BROWSER: "off",
       MINIO_ROOT_USER: accessKey,

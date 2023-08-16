@@ -1,10 +1,10 @@
 import { KiwiPreconditions } from "@kiwiproject/kiwi-js";
 import { ElasticsearchContainer } from "@testcontainers/elasticsearch";
 
-async function startElasticSearchContainer() {
-  global.ELASTIC_SEARCH_CONTAINER = await new ElasticsearchContainer(
-    "elasticsearch:8.6.1",
-  )
+async function startElasticSearchContainer(
+  image: string = "elasticsearch:8.6.1",
+) {
+  global.ELASTIC_SEARCH_CONTAINER = await new ElasticsearchContainer(image)
     .withEnvironment({ "xpack.security.enabled": "false" })
     .start();
 }
