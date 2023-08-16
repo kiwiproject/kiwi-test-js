@@ -1,5 +1,5 @@
-import {afterEach, describe, expect, it} from "@jest/globals";
-import {MongoExtension} from "../../src";
+import { afterEach, describe, expect, it } from "@jest/globals";
+import { MongoExtension } from "../../src";
 
 describe("MongoExtension", () => {
   afterEach(async () => {

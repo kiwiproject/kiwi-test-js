@@ -1,6 +1,6 @@
-import {KiwiPreconditions} from "@kiwiproject/kiwi-js";
-import {PostgreSqlContainer} from "@testcontainers/postgresql";
-import {Client} from "pg";
+import { KiwiPreconditions } from "@kiwiproject/kiwi-js";
+import { PostgreSqlContainer } from "@testcontainers/postgresql";
+import { Client } from "pg";
 
 async function startPostgresContainer() {
   global.POSTGRES_CONTAINER = await new PostgreSqlContainer().start();
