@@ -1,5 +1,5 @@
-import {KiwiPreconditions} from "@kiwiproject/kiwi-js";
-import {GenericContainer} from "testcontainers";
+import { KiwiPreconditions } from "@kiwiproject/kiwi-js";
+import { GenericContainer } from "testcontainers";
 
 async function startMongoContainer() {
   global.MONGO_CONTAINER = await new GenericContainer("mongo")

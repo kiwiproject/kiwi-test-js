@@ -1,5 +1,5 @@
-import {KiwiPreconditions} from "@kiwiproject/kiwi-js";
-import {ElasticsearchContainer} from "@testcontainers/elasticsearch";
+import { KiwiPreconditions } from "@kiwiproject/kiwi-js";
+import { ElasticsearchContainer } from "@testcontainers/elasticsearch";
 
 async function startElasticSearchContainer() {
   global.ELASTIC_SEARCH_CONTAINER = await new ElasticsearchContainer(

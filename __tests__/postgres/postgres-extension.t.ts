@@ -1,6 +1,6 @@
-import {afterEach, describe, expect, it} from "@jest/globals";
-import {PostgresExtension} from "../../src";
-import {Client} from "pg";
+import { afterEach, describe, expect, it } from "@jest/globals";
+import { PostgresExtension } from "../../src";
+import { Client } from "pg";
 
 describe("PostgresExtension", () => {
   afterEach(async () => {

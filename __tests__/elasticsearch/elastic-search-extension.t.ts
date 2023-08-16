@@ -1,5 +1,5 @@
-import {afterEach, describe, expect, it} from "@jest/globals";
-import {ElasticSearchExtension} from "../../src";
+import { afterEach, describe, expect, it } from "@jest/globals";
+import { ElasticSearchExtension } from "../../src";
 
 describe("ElasticSearchExtension", () => {
   afterEach(async () => {
