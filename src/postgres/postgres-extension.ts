@@ -1,6 +1,6 @@
-import {KiwiPreconditions} from "@kiwiproject/kiwi-js";
-import {PostgreSqlContainer} from "@testcontainers/postgresql";
-import {Client} from "pg";
+import { KiwiPreconditions } from "@kiwiproject/kiwi-js";
+import { PostgreSqlContainer } from "@testcontainers/postgresql";
+import { Client } from "pg";
 
 /**
  * Starts a Postgres container and stores the container information in global.POSTGRES_CONTAINER.

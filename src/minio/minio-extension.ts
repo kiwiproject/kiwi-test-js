@@ -1,5 +1,5 @@
-import {KiwiPreconditions} from "@kiwiproject/kiwi-js";
-import {GenericContainer, Wait} from "testcontainers";
+import { KiwiPreconditions } from "@kiwiproject/kiwi-js";
+import { GenericContainer, Wait } from "testcontainers";
 
 /**
  * Starts a Minio container and stores the container information in global.MINIO_CONTAINER

@@ -1,5 +1,5 @@
-import {KiwiPreconditions} from "@kiwiproject/kiwi-js";
-import {GenericContainer} from "testcontainers";
+import { KiwiPreconditions } from "@kiwiproject/kiwi-js";
+import { GenericContainer } from "testcontainers";
 
 /**
  * Starts a Mongo container and stores the container information in global.MONGO_CONTAINER.

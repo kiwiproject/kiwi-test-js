@@ -1,5 +1,5 @@
-import {KiwiPreconditions} from "@kiwiproject/kiwi-js";
-import {ElasticsearchContainer} from "@testcontainers/elasticsearch";
+import { KiwiPreconditions } from "@kiwiproject/kiwi-js";
+import { ElasticsearchContainer } from "@testcontainers/elasticsearch";
 
 /**
  * Starts an Elastic search container and stores the container information in global.ELASTIC_SEARCH_CONTAINER.
