@@ -1,9 +1,16 @@
 import { KiwiPreconditions } from "@kiwiproject/kiwi-js";
 import { GenericContainer, Wait } from "testcontainers";
 
-async function startMinioSearchContainer(
-  accessKey: string,
-  secretKey: string,
+/**
+ * Starts a Minio container and stores the container information in global.MINIO_CONTAINER
+ *
+ * @param accessKey The access key configured to connect. Defaults to minioadmin.
+ * @param secretKey The secret key configured to connect. Defaults to keyboard cat.
+ * @param image The image name/version to use for minio. Defaults to minio/minio:RELEASE.2023-08-09T23-30-22Z.
+ */
+async function startMinioContainer(
+  accessKey: string = "minioadmin",
+  secretKey: string = "keyboard cat",
   image: string = "minio/minio:RELEASE.2023-08-09T23-30-22Z",
 ) {
   global.MINIO_CONTAINER = await new GenericContainer(image)
@@ -21,7 +28,11 @@ async function startMinioSearchContainer(
     .start();
 }
 
-async function stopMinioSearchContainer() {
+/**
+ * Stops a previously started Minio container. Error will be thrown if startMinioContainer has not been
+ * previously called.
+ */
+async function stopMinioContainer() {
   KiwiPreconditions.checkState(
     global.MINIO_CONTAINER !== undefined,
     "Minio container has not been previously started",
@@ -30,6 +41,10 @@ async function stopMinioSearchContainer() {
   global.MINIO_CONTAINER = undefined;
 }
 
+/**
+ * Retrieves the mapped external port of the started Minio container. Error will be thrown if startMinioContainer was
+ * not previously called.
+ */
 function getMinioPort(): number {
   KiwiPreconditions.checkState(
     global.MINIO_CONTAINER !== undefined,
@@ -40,7 +55,7 @@ function getMinioPort(): number {
 }
 
 export const MinioExtension = {
-  startMinioSearchContainer,
-  stopMinioSearchContainer,
+  startMinioContainer,
+  stopMinioContainer,
   getMinioPort,
 };

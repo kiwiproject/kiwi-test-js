@@ -11,10 +11,7 @@ describe("MinioExtension", () => {
 
   describe("startMinioContainer", () => {
     it("should start the minio container", async () => {
-      await MinioExtension.startMinioSearchContainer(
-        "minioadmin",
-        "keyboard cat",
-      );
+      await MinioExtension.startMinioContainer();
 
       expect(global.MINIO_CONTAINER).toBeDefined();
 
@@ -24,17 +21,14 @@ describe("MinioExtension", () => {
 
   describe("stopMinioContainer", () => {
     it("should stop the minio container", async () => {
-      await MinioExtension.startMinioSearchContainer(
-        "minioadmin",
-        "keyboard cat",
-      );
-      await MinioExtension.stopMinioSearchContainer();
+      await MinioExtension.startMinioContainer();
+      await MinioExtension.stopMinioContainer();
 
       expect(global.MINIO_CONTAINER).toBeUndefined();
     }, 60_000);
 
     it("should throw error when container is not previously started", () => {
-      expect(MinioExtension.stopMinioSearchContainer()).rejects.toEqual(
+      expect(MinioExtension.stopMinioContainer()).rejects.toEqual(
         Error(
           "IllegalStateException: Minio container has not been previously started",
         ),
@@ -46,10 +40,7 @@ describe("MinioExtension", () => {
 
   describe("getMinioPort", () => {
     it("should return the mapped port for the started container", async () => {
-      await MinioExtension.startMinioSearchContainer(
-        "minioadmin",
-        "keyboard cat",
-      );
+      await MinioExtension.startMinioContainer();
 
       const port = MinioExtension.getMinioPort();
       expect(port).toBeGreaterThan(0);
