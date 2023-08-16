@@ -1,8 +1,8 @@
 import { KiwiPreconditions } from "@kiwiproject/kiwi-js";
 import { GenericContainer } from "testcontainers";
 
-async function startMongoContainer() {
-  global.MONGO_CONTAINER = await new GenericContainer("mongo")
+async function startMongoContainer(image: string = "mongo:6") {
+  global.MONGO_CONTAINER = await new GenericContainer(image)
     .withExposedPorts(27017)
     .start();
 }
