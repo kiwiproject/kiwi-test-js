@@ -22,7 +22,7 @@
     ]
   },
   "dependencies": {
-    "@jest/globals": "29.6.2",
+    "@jest/globals": "29.6.3",
     "@kiwiproject/kiwi-js": "0.8.0",
     "@testcontainers/elasticsearch": "10.2.1",
     "@testcontainers/postgresql": "10.2.1",
