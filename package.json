@@ -1,6 +1,6 @@
 {
   "name": "@kiwiproject/kiwi-test-js",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "kiwi-test-js is a test utility library. Most of these utilities are ports from the Java Kiwi-test library",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -22,6 +22,7 @@
     ]
   },
   "dependencies": {
+    "@elastic/elasticsearch": "8.8.1",
     "@jest/globals": "29.6.2",
     "@kiwiproject/kiwi-js": "0.8.0",
     "@testcontainers/elasticsearch": "10.2.1",

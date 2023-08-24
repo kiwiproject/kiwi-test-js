@@ -1,5 +1,7 @@
 import { KiwiPreconditions } from "@kiwiproject/kiwi-js";
 import { ElasticsearchContainer } from "@testcontainers/elasticsearch";
+import { Client } from "@elastic/elasticsearch";
+import { IngestPutPipelineRequest } from "@elastic/elasticsearch/lib/api/types";
 
 /**
  * Starts an Elastic search container and stores the container information in global.ELASTIC_SEARCH_CONTAINER.
@@ -9,9 +11,14 @@ import { ElasticsearchContainer } from "@testcontainers/elasticsearch";
 async function startElasticSearchContainer(
   image: string = "elasticsearch:8.6.1",
 ) {
-  global.ELASTIC_SEARCH_CONTAINER = await new ElasticsearchContainer(image)
+  const container = await new ElasticsearchContainer(image)
     .withEnvironment({ "xpack.security.enabled": "false" })
     .start();
+
+  process.env.ELASTIC_SEARCH_EXTENSION_BASE_URI = container.getHttpUrl();
+
+  // NOTE: This will only work if tests are runInBand (i.e. not in parallel)
+  global.ELASTIC_SEARCH_CONTAINER = container;
 }
 
 /**
@@ -21,10 +28,15 @@ async function startElasticSearchContainer(
 async function stopElasticSearchContainer() {
   KiwiPreconditions.checkState(
     global.ELASTIC_SEARCH_CONTAINER !== undefined,
-    "Elastic Search container has not been previously started",
+    "Elastic Search container has not been previously started or is not running in band",
   );
   await global.ELASTIC_SEARCH_CONTAINER.stop();
   global.ELASTIC_SEARCH_CONTAINER = undefined;
+  delete process.env.ELASTIC_SEARCH_EXTENSION_BASE_URI;
+}
+
+function setElasticSearchUrl(host: string, port: number) {
+  process.env.ELASTIC_SEARCH_EXTENSION_BASE_URI = `http://${host}:${port}`;
 }
 
 /**
@@ -33,15 +45,57 @@ async function stopElasticSearchContainer() {
  */
 function getElasticSearchUrl(): string {
   KiwiPreconditions.checkState(
-    global.ELASTIC_SEARCH_CONTAINER !== undefined,
+    process.env.ELASTIC_SEARCH_EXTENSION_BASE_URI !== undefined,
     "Elastic Search container has not been previously started",
   );
 
-  return global.ELASTIC_SEARCH_CONTAINER.getHttpUrl();
+  return process.env.ELASTIC_SEARCH_EXTENSION_BASE_URI;
+}
+
+async function createIndex(
+  indexName: string,
+  indexMapping: unknown,
+  pipelines: Array<unknown>,
+) {
+  const client = new Client({ node: getElasticSearchUrl() });
+  await client.indices.create({
+    index: indexName,
+    mappings: indexMapping,
+  });
+
+  for (const pipeline of pipelines) {
+    await client.ingest.putPipeline(pipeline as IngestPutPipelineRequest);
+  }
+
+  await client.close();
+}
+
+async function clearIndex(indexName: string) {
+  const client = new Client({ node: getElasticSearchUrl() });
+  await client.deleteByQuery({
+    index: indexName,
+    query: {
+      match_all: {},
+    },
+    refresh: true,
+  });
+  await client.close();
+}
+
+async function deleteIndex(indexName: string) {
+  const client = new Client({ node: getElasticSearchUrl() });
+  await client.indices.delete({
+    index: indexName,
+  });
+  await client.close();
 }
 
 export const ElasticSearchExtension = {
   startElasticSearchContainer,
   stopElasticSearchContainer,
+  setElasticSearchUrl,
   getElasticSearchUrl,
+  createIndex,
+  clearIndex,
+  deleteIndex,
 };
