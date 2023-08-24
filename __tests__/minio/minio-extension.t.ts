@@ -7,6 +7,8 @@ describe("MinioExtension", () => {
       await global.MINIO_CONTAINER.stop();
       global.MINIO_CONTAINER = undefined;
     }
+
+    delete process.env.MINIO_EXTENSION_PORT;
   });
 
   describe("startMinioContainer", () => {
@@ -14,8 +16,7 @@ describe("MinioExtension", () => {
       await MinioExtension.startMinioContainer();
 
       expect(global.MINIO_CONTAINER).toBeDefined();
-
-      await global.MINIO_CONTAINER.stop();
+      expect(process.env.MINIO_EXTENSION_PORT).toBeDefined();
     }, 60_000);
   });
 
@@ -25,16 +26,25 @@ describe("MinioExtension", () => {
       await MinioExtension.stopMinioContainer();
 
       expect(global.MINIO_CONTAINER).toBeUndefined();
+      expect(process.env.MINIO_EXTENSION_PORT).toBeUndefined();
     }, 60_000);
 
     it("should throw error when container is not previously started", () => {
       expect(MinioExtension.stopMinioContainer()).rejects.toEqual(
         Error(
-          "IllegalStateException: Minio container has not been previously started",
+          "IllegalStateException: Minio container has not been previously started or is not running in band",
         ),
       );
 
       expect(global.MINIO_CONTAINER).toBeUndefined();
+    });
+  });
+
+  describe("setMinioPort", () => {
+    it("should set the uri env variable for the minio port", () => {
+      MinioExtension.setMinioPort(12345);
+
+      expect(process.env.MINIO_EXTENSION_PORT).toEqual("12345");
     });
   });
 
