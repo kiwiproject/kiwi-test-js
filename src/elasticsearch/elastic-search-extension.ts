@@ -54,8 +54,8 @@ function getElasticSearchUrl(): string {
 
 async function createIndex(
   indexName: string,
-  indexMapping: unknown = {},
-  pipelines: Array<unknown> = [],
+  indexMapping: unknown,
+  pipelines: Array<unknown>,
 ) {
   const client = new Client({ node: getElasticSearchUrl() });
   await client.indices.create({
