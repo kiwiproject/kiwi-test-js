@@ -40,7 +40,7 @@
     "@types/pg": "8.10.2",
     "@typescript-eslint/eslint-plugin": "6.4.1",
     "@typescript-eslint/parser": "6.4.1",
-    "babel-jest": "29.6.3",
+    "babel-jest": "29.6.4",
     "eslint": "8.47.0",
     "prettier": "3.0.2",
     "typescript": "5.1.6"
