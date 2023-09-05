@@ -39,7 +39,7 @@
     "@types/node": "20.5.7",
     "@types/pg": "8.10.2",
     "@typescript-eslint/eslint-plugin": "6.5.0",
-    "@typescript-eslint/parser": "6.5.0",
+    "@typescript-eslint/parser": "6.6.0",
     "babel-jest": "29.6.4",
     "eslint": "8.48.0",
     "prettier": "3.0.3",
