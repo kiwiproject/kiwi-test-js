@@ -9,6 +9,7 @@ describe("MinioExtension", () => {
     }
 
     delete process.env.MINIO_EXTENSION_PORT;
+    delete process.env.MINIO_EXTENSION_HOST;
   });
 
   describe("startMinioContainer", () => {
@@ -17,6 +18,7 @@ describe("MinioExtension", () => {
 
       expect(global.MINIO_CONTAINER).toBeDefined();
       expect(process.env.MINIO_EXTENSION_PORT).toBeDefined();
+      expect(process.env.MINIO_EXTENSION_HOST).toBeDefined();
     }, 60_000);
   });
 
@@ -27,6 +29,7 @@ describe("MinioExtension", () => {
 
       expect(global.MINIO_CONTAINER).toBeUndefined();
       expect(process.env.MINIO_EXTENSION_PORT).toBeUndefined();
+      expect(process.env.MINIO_EXTENSION_HOST).toBeUndefined();
     }, 60_000);
 
     it("should throw error when container is not previously started", () => {
@@ -41,7 +44,7 @@ describe("MinioExtension", () => {
   });
 
   describe("setMinioPort", () => {
-    it("should set the uri env variable for the minio port", () => {
+    it("should set the port env variable for the minio port", () => {
       MinioExtension.setMinioPort(12345);
 
       expect(process.env.MINIO_EXTENSION_PORT).toEqual("12345");
@@ -58,6 +61,29 @@ describe("MinioExtension", () => {
 
     it("should throw error when container is not previously started", () => {
       expect(() => MinioExtension.getMinioPort()).toThrow(
+        "IllegalStateException: Minio container has not been previously started",
+      );
+    });
+  });
+
+  describe("setMinioHost", () => {
+    it("should set the host env variable for the minio host", () => {
+      MinioExtension.setMinioHost("min.io");
+
+      expect(process.env.MINIO_EXTENSION_HOST).toEqual("min.io");
+    });
+  });
+
+  describe("getMinioHost", () => {
+    it("should return the host for the started container", async () => {
+      await MinioExtension.startMinioContainer();
+
+      const host = MinioExtension.getMinioHost();
+      expect(host).toEqual("localhost");
+    }, 60_000);
+
+    it("should throw error when container is not previously started", () => {
+      expect(() => MinioExtension.getMinioHost()).toThrow(
         "IllegalStateException: Minio container has not been previously started",
       );
     });
