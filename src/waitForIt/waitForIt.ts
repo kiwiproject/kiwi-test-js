@@ -13,12 +13,12 @@ class WaitFor {
     this.checkIntervalMs = 100;
   }
 
-  atMost(time: number, units: Time): WaitFor {
+  atMost(time: number, units: Time): this {
     this.timeoutMs = convert(time, units).to("ms");
     return this;
   }
 
-  checkEvery(time: number, units: Time): WaitFor {
+  checkEvery(time: number, units: Time): this {
     this.checkIntervalMs = convert(time, units).to("ms");
     return this;
   }
@@ -33,7 +33,7 @@ class WaitFor {
         if (cb.apply(this)) {
           resolve(`Condition met after ${tries} of ${totalTries} tries`);
         } else if (tries > totalTries) {
-          reject(`Condition was not met after ${totalTries} tries`);
+          reject(new Error(`Condition was not met after ${totalTries} tries`));
         } else {
           tries += 1;
           setTimeout(loop, this.checkIntervalMs);
