@@ -106,7 +106,7 @@ describe("MongoExtension", () => {
       });
 
       const dbNamesBeforeDrop = dbListingBeforeDrop.databases.map(
-        (db: { name: any }) => db.name,
+        (db: { name: string }) => db.name,
       );
       expect(dbNamesBeforeDrop).toContain("kiwi_drop");
 
@@ -118,7 +118,7 @@ describe("MongoExtension", () => {
       });
 
       const dbNamesAfterDrop = dbListingAfterDrop.databases.map(
-        (db: { name: any }) => db.name,
+        (db: { name: string }) => db.name,
       );
       expect(dbNamesAfterDrop).not.toContain("kiwi_drop");
 

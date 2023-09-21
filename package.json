@@ -27,6 +27,7 @@
     "@kiwiproject/kiwi-js": "0.8.0",
     "@testcontainers/elasticsearch": "10.2.1",
     "@testcontainers/postgresql": "10.2.1",
+    "convert": "4.13.2",
     "jest": "29.7.0",
     "mongodb": "6.1.0",
     "pg": "8.11.3",
