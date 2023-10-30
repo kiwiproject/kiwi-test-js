@@ -25,7 +25,7 @@
     "@elastic/elasticsearch": "8.10.0",
     "@jest/globals": "29.7.0",
     "@kiwiproject/kiwi-js": "0.8.0",
-    "@testcontainers/elasticsearch": "10.2.1",
+    "@testcontainers/elasticsearch": "10.2.2",
     "@testcontainers/postgresql": "10.2.2",
     "convert": "4.13.2",
     "jest": "29.7.0",
