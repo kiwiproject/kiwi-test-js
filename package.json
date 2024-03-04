@@ -39,7 +39,7 @@
     "@babel/preset-env": "7.24.0",
     "@babel/preset-typescript": "7.23.3",
     "@types/node": "20.11.24",
-    "@types/pg": "8.11.1",
+    "@types/pg": "8.11.2",
     "@typescript-eslint/eslint-plugin": "7.1.0",
     "@typescript-eslint/parser": "7.0.2",
     "babel-jest": "29.7.0",
