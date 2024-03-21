@@ -77,7 +77,7 @@ class WaitFor {
    * will be returned.
    * @param cb The function to check if the condition is true or false.
    */
-  until(cb: () => boolean): Promise<string> {
+  async until(cb: () => boolean | Promise<boolean>): Promise<string> {
     const totalTries = this.timeoutMs / this.pollIntervalMs;
 
     const aliasText = this.alias ? `with alias ${this.alias} ` : "";
@@ -91,8 +91,8 @@ class WaitFor {
     return new Promise((resolve, reject) => {
       let tries = 1;
 
-      const loop = () => {
-        if (cb.apply(this)) {
+      const processResult = (result: boolean) => {
+        if (result) {
           if (this.verbose) {
             console.log(
               `Condition ${aliasText}met after ${tries} of ${totalTries} tries`,
@@ -115,6 +115,17 @@ class WaitFor {
         } else {
           tries += 1;
           setTimeout(loop, this.pollIntervalMs);
+        }
+      };
+
+      const loop = async () => {
+        const cbResult = cb.apply(this);
+
+        if (typeof cbResult === "boolean") {
+          processResult(cbResult);
+        } else {
+          const cbPromiseResult = await cbResult;
+          processResult(cbPromiseResult);
         }
       };
 
