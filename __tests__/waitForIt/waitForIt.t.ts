@@ -10,6 +10,10 @@ describe("WaitForIt", () => {
     wait().until(() => true);
   });
 
+  it("should resolve when condition passes and callback returns a promise", () => {
+    wait().until(() => Promise.resolve(true));
+  });
+
   it("should reject when condition runs out of tries", async () => {
     await expect(wait().until(() => false)).rejects.toEqual(
       new Error("Condition was not met after 40 tries"),
