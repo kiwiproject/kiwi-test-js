@@ -24,7 +24,7 @@
   "dependencies": {
     "@elastic/elasticsearch": "8.15.0",
     "@jest/globals": "29.7.0",
-    "@kiwiproject/kiwi-js": "0.11.0",
+    "@kiwiproject/kiwi-js": "0.12.0",
     "@testcontainers/elasticsearch": "10.13.1",
     "@testcontainers/postgresql": "10.13.2",
     "convert": "5.4.1",
