@@ -35,7 +35,7 @@
     "testcontainers": "10.13.2"
   },
   "devDependencies": {
-    "@babel/core": "7.25.7",
+    "@babel/core": "7.25.8",
     "@babel/preset-env": "7.25.8",
     "@babel/preset-typescript": "7.25.7",
     "@types/node": "22.7.5",
