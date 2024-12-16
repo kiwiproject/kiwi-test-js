@@ -22,14 +22,14 @@
     ]
   },
   "dependencies": {
-    "@elastic/elasticsearch": "8.16.2",
+    "@elastic/elasticsearch": "8.17.0",
     "@jest/globals": "29.7.0",
     "@kiwiproject/kiwi-js": "0.12.0",
     "@testcontainers/elasticsearch": "10.16.0",
     "@testcontainers/postgresql": "10.16.0",
     "convert": "5.7.0",
     "jest": "29.7.0",
-    "mongodb": "6.11.0",
+    "mongodb": "6.12.0",
     "pg": "8.13.1",
     "redis": "4.7.0",
     "testcontainers": "10.16.0"
