@@ -22,7 +22,7 @@
     ]
   },
   "dependencies": {
-    "@elastic/elasticsearch": "8.17.1",
+    "@elastic/elasticsearch": "9.0.1",
     "@jest/globals": "29.7.0",
     "@kiwiproject/kiwi-js": "0.12.0",
     "@testcontainers/elasticsearch": "10.26.0",
