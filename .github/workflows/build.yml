@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node_version: ['18', '20', '21']
+        node_version: ['20', '22', '24']
     steps:
       # Check out the project
       - uses: actions/checkout@v4
