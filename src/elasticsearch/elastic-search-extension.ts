@@ -6,10 +6,10 @@ import { IngestPutPipelineRequest } from "@elastic/elasticsearch/lib/api/types";
 /**
  * Starts an Elastic search container and stores the container information in global.ELASTIC_SEARCH_CONTAINER.
  *
- * @param image The image name/version to use for elastic search. Defaults to elasticsearch:9.0.3.
+ * @param image The image name/version to use for elastic search. Defaults to elasticsearch:9.0.2.
  */
 async function startElasticSearchContainer(
-  image: string = "elasticsearch:9.0.3",
+  image: string = "elasticsearch:9.0.2",
 ) {
   const container = await new ElasticsearchContainer(image)
     .withEnvironment({ "xpack.security.enabled": "false" })
