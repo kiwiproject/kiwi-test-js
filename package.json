@@ -38,7 +38,7 @@
     "@babel/core": "7.28.5",
     "@babel/preset-env": "7.28.5",
     "@babel/preset-typescript": "7.28.5",
-    "@eslint/eslintrc": "3.3.1",
+    "@eslint/eslintrc": "3.3.3",
     "@eslint/js": "9.39.1",
     "@types/node": "24.10.1",
     "@types/pg": "8.15.6",
@@ -47,8 +47,8 @@
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-prettier": "5.5.4",
     "globals": "16.5.0",
-    "prettier": "3.6.2",
+    "prettier": "3.7.3",
     "typescript": "5.9.3",
-    "typescript-eslint": "8.47.0"
+    "typescript-eslint": "8.48.0"
   }
 }
