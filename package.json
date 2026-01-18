@@ -1,13 +1,22 @@
 {
   "name": "@kiwiproject/kiwi-test-js",
-  "version": "0.6.0",
+  "version": "0.0.0-semantically-released",
   "description": "kiwi-test-js is a test utility library. Most of these utilities are ports from the Java Kiwi-test library",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
     "/dist"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kiwiproject/kiwi-test-js.git"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
   "scripts": {
+    "build": "tsc",
     "format": "npx prettier --ignore-path .gitignore --write \"**/*.+(ts|js|json)\"",
     "lint": "npx eslint --fix src",
     "test": "npx jest --coverage --collectCoverageFrom=src/**/*.ts"
@@ -36,6 +45,7 @@
   },
   "devDependencies": {
     "@babel/core": "7.28.5",
+    "semantic-release": "24.2.5",
     "@babel/preset-env": "7.28.5",
     "@babel/preset-typescript": "7.28.5",
     "@eslint/eslintrc": "3.3.3",
