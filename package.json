@@ -31,17 +31,17 @@
     ]
   },
   "dependencies": {
-    "@elastic/elasticsearch": "9.3.0",
+    "@elastic/elasticsearch": "9.3.2",
     "@jest/globals": "30.2.0",
     "@kiwiproject/kiwi-js": "1.0.0",
-    "@testcontainers/elasticsearch": "11.11.0",
-    "@testcontainers/postgresql": "11.11.0",
+    "@testcontainers/elasticsearch": "11.12.0",
+    "@testcontainers/postgresql": "11.12.0",
     "convert": "6.0.0",
     "jest": "30.2.0",
     "mongodb": "7.1.0",
     "pg": "8.18.0",
-    "redis": "5.10.0",
-    "testcontainers": "11.11.0"
+    "redis": "5.11.0",
+    "testcontainers": "11.12.0"
   },
   "devDependencies": {
     "@babel/core": "7.29.0",
@@ -50,7 +50,7 @@
     "@babel/preset-typescript": "7.28.5",
     "@eslint/eslintrc": "3.3.3",
     "@eslint/js": "9.39.2",
-    "@types/node": "25.2.2",
+    "@types/node": "25.2.3",
     "@types/pg": "8.16.0",
     "babel-jest": "30.2.0",
     "eslint": "9.39.2",
@@ -59,6 +59,6 @@
     "globals": "17.3.0",
     "prettier": "3.8.1",
     "typescript": "5.9.3",
-    "typescript-eslint": "8.54.0"
+    "typescript-eslint": "8.55.0"
   }
 }
