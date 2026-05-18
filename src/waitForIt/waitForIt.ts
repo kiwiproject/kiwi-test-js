@@ -13,7 +13,7 @@ class WaitFor {
   private timeoutMs: number;
   private pollIntervalMs: number;
   private pollDelayMs: number;
-  private alias: string;
+  private alias?: string;
   private verbose: boolean;
 
   constructor() {

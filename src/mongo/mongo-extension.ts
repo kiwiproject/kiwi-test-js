@@ -46,7 +46,7 @@ function getMongoBaseUrl(): string {
     "Mongo container has not been previously started",
   );
 
-  return process.env.MONGO_EXTENSION_BASE_URI;
+  return process.env.MONGO_EXTENSION_BASE_URI!;
 }
 
 /**

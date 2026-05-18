@@ -49,7 +49,7 @@ function getPostgresBaseUrl(): string {
     "Postgres container has not been previously started",
   );
 
-  return process.env.POSTGRES_EXTENSION_BASE_URI;
+  return process.env.POSTGRES_EXTENSION_BASE_URI!;
 }
 
 /**

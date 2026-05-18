@@ -67,7 +67,7 @@ function getMinioPort(): number {
     "Minio container has not been previously started",
   );
 
-  return parseInt(process.env.MINIO_EXTENSION_PORT, 10);
+  return parseInt(process.env.MINIO_EXTENSION_PORT!, 10);
 }
 
 /**
@@ -82,7 +82,7 @@ function getMinioHost(): string {
     "Minio container has not been previously started",
   );
 
-  return process.env.MINIO_EXTENSION_HOST;
+  return process.env.MINIO_EXTENSION_HOST!;
 }
 
 export const MinioExtension = {

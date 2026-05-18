@@ -46,7 +46,7 @@ function getRedisBaseUrl(): string {
     "Redis container has not been previously started",
   );
 
-  return process.env.REDIS_EXTENSION_BASE_URI;
+  return process.env.REDIS_EXTENSION_BASE_URI!;
 }
 
 async function flushDatabase() {
