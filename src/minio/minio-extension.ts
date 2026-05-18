@@ -43,7 +43,7 @@ async function stopMinioContainer() {
     global.MINIO_CONTAINER !== undefined,
     "Minio container has not been previously started or is not running in band",
   );
-  await global.MINIO_CONTAINER.stop();
+  await global.MINIO_CONTAINER!.stop();
   global.MINIO_CONTAINER = undefined;
   delete process.env.MINIO_EXTENSION_PORT;
   delete process.env.MINIO_EXTENSION_HOST;
@@ -67,7 +67,7 @@ function getMinioPort(): number {
     "Minio container has not been previously started",
   );
 
-  return parseInt(process.env.MINIO_EXTENSION_PORT, 10);
+  return parseInt(process.env.MINIO_EXTENSION_PORT!, 10);
 }
 
 /**
@@ -82,7 +82,7 @@ function getMinioHost(): string {
     "Minio container has not been previously started",
   );
 
-  return process.env.MINIO_EXTENSION_HOST;
+  return process.env.MINIO_EXTENSION_HOST!;
 }
 
 export const MinioExtension = {

@@ -1,7 +1,7 @@
 import { KiwiPreconditions } from "@kiwiproject/kiwi-js";
 import { ElasticsearchContainer } from "@testcontainers/elasticsearch";
 import { Client } from "@elastic/elasticsearch";
-import { IngestPutPipelineRequest } from "@elastic/elasticsearch/lib/api/types";
+import { IngestPutPipelineRequest, MappingTypeMapping } from "@elastic/elasticsearch/lib/api/types";
 
 /**
  * Starts an Elastic search container and stores the container information in global.ELASTIC_SEARCH_CONTAINER.
@@ -30,7 +30,7 @@ async function stopElasticSearchContainer() {
     global.ELASTIC_SEARCH_CONTAINER !== undefined,
     "Elastic Search container has not been previously started or is not running in band",
   );
-  await global.ELASTIC_SEARCH_CONTAINER.stop();
+  await global.ELASTIC_SEARCH_CONTAINER!.stop();
   global.ELASTIC_SEARCH_CONTAINER = undefined;
   delete process.env.ELASTIC_SEARCH_EXTENSION_BASE_URI;
 }
@@ -49,7 +49,7 @@ function getElasticSearchUrl(): string {
     "Elastic Search container has not been previously started",
   );
 
-  return process.env.ELASTIC_SEARCH_EXTENSION_BASE_URI;
+  return process.env.ELASTIC_SEARCH_EXTENSION_BASE_URI!;
 }
 
 async function createIndex(
@@ -60,7 +60,7 @@ async function createIndex(
   const client = new Client({ node: getElasticSearchUrl() });
   await client.indices.create({
     index: indexName,
-    mappings: indexMapping,
+    mappings: indexMapping as MappingTypeMapping,
   });
 
   for (const pipeline of pipelines) {
