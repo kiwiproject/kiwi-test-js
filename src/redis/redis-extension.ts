@@ -27,7 +27,7 @@ async function stopRedisContainer() {
     global.REDIS_CONTAINER !== undefined,
     "Redis container has not been previously started or is not running in band",
   );
-  await global.REDIS_CONTAINER.stop();
+  await global.REDIS_CONTAINER!.stop();
   global.REDIS_CONTAINER = undefined;
   delete process.env.REDIS_EXTENSION_BASE_URI;
 }

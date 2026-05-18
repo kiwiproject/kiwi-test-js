@@ -27,7 +27,7 @@ async function stopMongoContainer() {
     global.MONGO_CONTAINER !== undefined,
     "Mongo container has not been previously started or is not running in band",
   );
-  await global.MONGO_CONTAINER.stop();
+  await global.MONGO_CONTAINER!.stop();
   global.MONGO_CONTAINER = undefined;
   delete process.env.MONGO_EXTENSION_BASE_URI;
 }

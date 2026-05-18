@@ -1,13 +1,13 @@
-import type { ElasticsearchContainer } from "@testcontainers/elasticsearch";
-import type { GenericContainer } from "testcontainers";
-import type { PostgreSqlContainer } from "@testcontainers/postgresql";
+import type { StartedElasticsearchContainer } from "@testcontainers/elasticsearch";
+import type { StartedTestContainer } from "testcontainers";
+import type { StartedPostgreSqlContainer } from "@testcontainers/postgresql";
 
 declare global {
-  var ELASTIC_SEARCH_CONTAINER: ElasticsearchContainer | undefined;
-  var MINIO_CONTAINER: GenericContainer | undefined;
-  var MONGO_CONTAINER: GenericContainer | undefined;
-  var POSTGRES_CONTAINER: PostgreSqlContainer | undefined;
-  var REDIS_CONTAINER: GenericContainer | undefined;
+  var ELASTIC_SEARCH_CONTAINER: StartedElasticsearchContainer | undefined;
+  var MINIO_CONTAINER: StartedTestContainer | undefined;
+  var MONGO_CONTAINER: StartedTestContainer | undefined;
+  var POSTGRES_CONTAINER: StartedPostgreSqlContainer | undefined;
+  var REDIS_CONTAINER: StartedTestContainer | undefined;
 }
 
 export {};

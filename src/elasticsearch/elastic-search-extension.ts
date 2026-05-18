@@ -30,7 +30,7 @@ async function stopElasticSearchContainer() {
     global.ELASTIC_SEARCH_CONTAINER !== undefined,
     "Elastic Search container has not been previously started or is not running in band",
   );
-  await global.ELASTIC_SEARCH_CONTAINER.stop();
+  await global.ELASTIC_SEARCH_CONTAINER!.stop();
   global.ELASTIC_SEARCH_CONTAINER = undefined;
   delete process.env.ELASTIC_SEARCH_EXTENSION_BASE_URI;
 }
