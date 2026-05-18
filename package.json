@@ -61,6 +61,7 @@
     "prettier": "3.8.3",
     "typescript": "5.9.3",
     "typescript-eslint": "8.59.4",
-    "@types/express": "5.0.6"
+    "@types/express": "5.0.6",
+    "apache-arrow": "21.0.0"
   }
 }
