@@ -21,6 +21,10 @@ updates:
       - "sleberknight"
       - "chrisrohr"
     open-pull-requests-limit: 10
+    cooldown:
+      semver-patch-days: 5
+      semver-minor-days: 21
+      semver-major-days: 30
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
