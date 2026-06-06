@@ -18,13 +18,13 @@ jobs:
         node_version: ['20', '22', '24']
     steps:
       # Check out the project
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10  # v6
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
 
       # Setup NodeJs
       - name: Setup Node ${{ matrix.node_version }}
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e  # v6
         with:
           node-version: ${{ matrix.node_version }}
           cache: 'npm'
@@ -32,7 +32,7 @@ jobs:
 
       # Cache all the things
       - name: Cache SonarCloud packages
-        uses: actions/cache@v5
+        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae  # v5
         if: ${{ env.SONAR_TOKEN != null && env.SONAR_TOKEN != '' && matrix.node_version == '18' }}
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -59,7 +59,7 @@ jobs:
       # Run Sonar Analysis
       - name: Analyze with SonarCloud
         if: ${{ env.SONAR_TOKEN != null && env.SONAR_TOKEN != '' && matrix.node_version == '18' }}
-        uses: SonarSource/sonarcloud-github-action@master
+        uses: SonarSource/sonarcloud-github-action@ba3875ecf642b2129de2b589510c81a8b53dbf4e  # master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
