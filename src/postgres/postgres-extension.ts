@@ -24,7 +24,7 @@ async function stopPostgresContainer() {
     global.POSTGRES_CONTAINER !== undefined,
     "Postgres container has not been previously started or is not running in band",
   );
-  await global.POSTGRES_CONTAINER.stop();
+  await global.POSTGRES_CONTAINER!.stop();
   global.POSTGRES_CONTAINER = undefined;
   delete process.env.POSTGRES_EXTENSION_BASE_URI;
 }
@@ -49,7 +49,7 @@ function getPostgresBaseUrl(): string {
     "Postgres container has not been previously started",
   );
 
-  return process.env.POSTGRES_EXTENSION_BASE_URI;
+  return process.env.POSTGRES_EXTENSION_BASE_URI!;
 }
 
 /**
