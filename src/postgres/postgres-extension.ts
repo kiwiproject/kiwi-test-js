@@ -142,13 +142,25 @@ function getPostgresUriWithDb(dbName: string): string {
  * startPostgresContainer is not previously called.
  *
  * @param dbName The name of the database to create.
+ * @param template Optional database to copy, via CREATE DATABASE ... TEMPLATE.
+ *
+ * Suites that build their schema once per test file can instead build it once into a template
+ * database and copy that here. Postgres copies the template at the file level, which is
+ * cheaper than replaying the DDL, and the saving grows with the number of test files.
+ *
+ * Postgres refuses to copy a template that has open connections, so close any connection used
+ * to build it before creating databases from it.
  */
-async function setupNewDatabase(dbName: string) {
+async function setupNewDatabase(dbName: string, template?: string) {
   const dbClient = new Client({
     connectionString: getPostgresBaseUrl(),
   });
   await dbClient.connect();
-  await dbClient.query(`create database ${dbName}`);
+  await dbClient.query(
+    template
+      ? `create database ${dbName} template ${template}`
+      : `create database ${dbName}`,
+  );
   await dbClient.end();
 }
 
