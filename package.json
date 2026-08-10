@@ -57,7 +57,7 @@
     "@eslint/eslintrc": "3.3.6",
     "@eslint/js": "10.0.1",
     "@types/node": "25.9.4",
-    "@types/pg": "8.20.0",
+    "@types/pg": "8.20.4",
     "babel-jest": "30.4.1",
     "eslint": "10.7.0",
     "eslint-config-prettier": "10.1.8",
@@ -65,7 +65,7 @@
     "globals": "17.7.0",
     "prettier": "3.9.6",
     "typescript": "5.9.3",
-    "typescript-eslint": "8.63.0",
+    "typescript-eslint": "8.64.0",
     "@types/express": "5.0.6",
     "apache-arrow": "21.1.0"
   }
