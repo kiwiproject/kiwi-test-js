@@ -51,22 +51,22 @@
   },
   "devDependencies": {
     "@babel/core": "7.29.7",
-    "semantic-release": "25.0.8",
+    "semantic-release": "25.0.9",
     "@babel/preset-env": "7.29.7",
     "@babel/preset-typescript": "7.29.7",
     "@eslint/eslintrc": "3.3.6",
     "@eslint/js": "10.0.1",
-    "@types/node": "26.1.1",
+    "@types/node": "26.1.2",
     "@types/pg": "8.20.4",
     "babel-jest": "30.4.1",
-    "eslint": "10.7.0",
+    "eslint": "10.8.0",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-prettier": "5.5.6",
-    "globals": "17.7.0",
+    "globals": "17.8.0",
     "prettier": "3.9.6",
     "typescript": "5.9.3",
-    "typescript-eslint": "8.64.0",
+    "typescript-eslint": "8.65.0",
     "@types/express": "5.0.6",
-    "apache-arrow": "21.1.0"
+    "apache-arrow": "21.2.0"
   }
 }
