@@ -6,12 +6,12 @@ import { GenericContainer, Wait } from "testcontainers";
  *
  * @param accessKey The access key configured to connect. Defaults to minioadmin.
  * @param secretKey The secret key configured to connect. Defaults to keyboard cat.
- * @param image The image name/version to use for minio. Defaults to minio/minio:RELEASE.2023-08-09T23-30-22Z.
+ * @param image The image name/version to use for minio. Defaults to quay.io/minio/minio:RELEASE.2023-08-09T23-30-22Z.
  */
 async function startMinioContainer(
   accessKey: string = "minioadmin",
   secretKey: string = "keyboard cat",
-  image: string = "minio/minio:RELEASE.2023-08-09T23-30-22Z",
+  image: string = "quay.io/minio/minio:RELEASE.2023-08-09T23-30-22Z",
 ) {
   const container = await new GenericContainer(image)
     .withEnvironment({
