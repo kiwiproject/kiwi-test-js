@@ -54,6 +54,7 @@ jobs:
       - name: Run tests
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          DEBUG: testcontainers*  # TEMP: diagnosing Minio/Chainguard startup hang, remove once fixed
         run: npm run test
 
       # Run Sonar Analysis
