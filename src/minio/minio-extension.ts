@@ -23,7 +23,7 @@ async function startMinioContainer(
     .withWaitStrategy(
       Wait.forAll([Wait.forListeningPorts(), Wait.forLogMessage(/1 Online/)]),
     )
-    .withTmpFs({ "/data": "rw,noexec,nosuid" })
+    .withTmpFs({ "/data": "rw,noexec,nosuid,mode=1777" })
     .withCommand(["server", "/data"])
     .start();
 
