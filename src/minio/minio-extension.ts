@@ -20,9 +20,7 @@ async function startMinioContainer(
       MINIO_ROOT_PASSWORD: secretKey,
     })
     .withExposedPorts(9000)
-    .withWaitStrategy(
-      Wait.forAll([Wait.forListeningPorts(), Wait.forLogMessage(/1 Online/)]),
-    )
+    .withWaitStrategy(Wait.forListeningPorts())
     .withTmpFs({ "/data": "rw,noexec,nosuid,mode=1777" })
     .withCommand(["server", "/data"])
     .start();
