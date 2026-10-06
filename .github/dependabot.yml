@@ -30,12 +30,12 @@ updates:
       # client handshake under Jest. Remove once a fixed release ships.
       # https://github.com/kiwiproject/kiwi-test-js/issues/760
       - dependency-name: "mongodb"
+        versions: [">= 7.6.0"]
       # convert 8.x dropped CommonJS support (ESM-only), which this project's
       # tsc/Jest setup can't resolve. Remove if/when we migrate to ESM.
       # https://github.com/kiwiproject/kiwi-test-js/issues/762
       - dependency-name: "convert"
-        update-types:
-          - "version-update:semver-major"
+        versions: [">= 8.0.0"]
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
