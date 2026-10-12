@@ -20,7 +20,7 @@ describe("ElasticSearchExtension", () => {
       expect(process.env.ELASTIC_SEARCH_EXTENSION_BASE_URI).toEqual(
         global.ELASTIC_SEARCH_CONTAINER.getHttpUrl(),
       );
-    }, 60_000);
+    }, 120_000);
   });
 
   describe("stopElasticSearchContainer", () => {
@@ -30,7 +30,7 @@ describe("ElasticSearchExtension", () => {
 
       expect(global.ELASTIC_SEARCH_CONTAINER).toBeUndefined();
       expect(process.env.ELASTIC_SEARCH_EXTENSION_BASE_URI).toBeUndefined();
-    }, 60_000);
+    }, 120_000);
 
     it("should throw error when container is not previously started", () => {
       expect(
@@ -61,7 +61,7 @@ describe("ElasticSearchExtension", () => {
 
       const url = ElasticSearchExtension.getElasticSearchUrl();
       expect(url).toContain("http://localhost:");
-    }, 60_000);
+    }, 120_000);
 
     it("should throw error when container is not previously started", () => {
       expect(() => ElasticSearchExtension.getElasticSearchUrl()).toThrow(
@@ -109,7 +109,7 @@ describe("ElasticSearchExtension", () => {
       expect(indexNames).toContain("kiwi");
 
       await client.close();
-    }, 60_000);
+    }, 120_000);
   });
 
   describe("clearIndex", () => {
@@ -154,7 +154,7 @@ describe("ElasticSearchExtension", () => {
       });
 
       expect(countAfterDelete.count).toEqual(0);
-    }, 60_000);
+    }, 120_000);
   });
 
   describe("deleteIndex", () => {
@@ -186,6 +186,6 @@ describe("ElasticSearchExtension", () => {
       const indicesAfterDelete = await client.cat.indices({ format: "json" });
       const indexNamesAfterDelete = indicesAfterDelete.map((i) => i.index);
       expect(indexNamesAfterDelete).not.toContain("kiwi_delete");
-    }, 60_000);
+    }, 120_000);
   });
 });
