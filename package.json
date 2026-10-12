@@ -50,7 +50,7 @@
     }
   },
   "devDependencies": {
-    "@babel/core": "8.0.5",
+    "@babel/core": "8.0.7",
     "semantic-release": "25.0.9",
     "@babel/preset-env": "8.0.5",
     "@babel/preset-typescript": "8.0.7",
