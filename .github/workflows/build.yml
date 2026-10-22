@@ -33,7 +33,7 @@ jobs:
       # Cache all the things
       - name: Cache SonarCloud packages
         uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9  # v5
-        if: ${{ env.SONAR_TOKEN != null && env.SONAR_TOKEN != '' && matrix.node_version == '18' }}
+        if: ${{ env.SONAR_TOKEN != null && env.SONAR_TOKEN != '' && matrix.node_version == '24' }}
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
@@ -58,7 +58,7 @@ jobs:
 
       # Run Sonar Analysis
       - name: Analyze with SonarCloud
-        if: ${{ env.SONAR_TOKEN != null && env.SONAR_TOKEN != '' && matrix.node_version == '18' }}
+        if: ${{ env.SONAR_TOKEN != null && env.SONAR_TOKEN != '' && matrix.node_version == '24' }}
         uses: SonarSource/sonarcloud-github-action@ba3875ecf642b2129de2b589510c81a8b53dbf4e  # master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
