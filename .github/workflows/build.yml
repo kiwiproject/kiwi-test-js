@@ -24,7 +24,7 @@ jobs:
 
       # Setup NodeJs
       - name: Setup Node ${{ matrix.node_version }}
-        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020  # v6
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020  # v7.0.0
         with:
           node-version: ${{ matrix.node_version }}
           cache: 'npm'
@@ -32,7 +32,7 @@ jobs:
 
       # Cache all the things
       - name: Cache SonarCloud packages
-        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9  # v5
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9  # v6.1.0
         if: ${{ env.SONAR_TOKEN != null && env.SONAR_TOKEN != '' && matrix.node_version == '24' }}
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
